@@ -1,40 +1,40 @@
-import {Router} from 'express';
+import { Router } from 'express';
 import prisma from "../prisma";
-import {genSalt, hash} from 'bcrypt'
+import { genSalt, hash } from 'bcrypt'
 import isEmail from "../helpers/isEmail";
 
 const router = Router();
 
 
-/// todo send jwt after signup
+/// TODO send jwt after signup
 router.post('/', async (req, res) => {
-    const {name, username, email, password} = req.body; // get data from req body
+    const { name, username, email, password } = req.body; // get data from req body
 
     // check data isn't missing
     if (!name || !username || !email || !password) {
-        return res.status(400).json({success: false, message: 'Invalid email or password'});
+        return res.status(400).json({ success: false, message: 'Invalid email or password' });
     }
 
     // regex check for email
     if (!isEmail(email.toLowerCase())) {
-        return res.status(400).json({success: false, message: 'Invalid email'});
+        return res.status(400).json({ success: false, message: 'Invalid email' });
     }
 
     // check if email or user already exists
     const usernameOrEmailExists = await prisma.user.count(
         {
             where:
-                {
-                    OR: [
-                        {email: email},
-                        {username: username}
-                    ]
-                }
+            {
+                OR: [
+                    { email: email },
+                    { username: username }
+                ]
+            }
         });
 
     // if true, return
     if (usernameOrEmailExists > 0) {
-        return res.status(400).json({success: false, message: 'Username or email already exists. Log in instead.'});
+        return res.status(400).json({ success: false, message: 'Username or email already exists. Log in instead.' });
     }
 
     // hash the password
@@ -52,13 +52,12 @@ router.post('/', async (req, res) => {
             }
         });
 
-        return res.status(200).json({success: true, message: 'Successfully registered.', data: result});
+        return res.status(200).json({ success: true, message: 'Successfully registered.', data: result });
     } catch (err) {
         console.log(err);
-        return res.status(500).json({success: false, message: 'Something went wrong. Please try again later.'});
+        return res.status(500).json({ success: false, message: 'Something went wrong. Please try again later.' });
     }
 })
-
 
 
 export default router;
