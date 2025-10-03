@@ -12,7 +12,7 @@ app.use(express.urlencoded({ extended: true }));
 import signup from './Routes/signup'
 import login from './Routes/login'
 import forgotpasswordreq from './Routes/forgotpasswordreq'
-import forgotpassword from './Routes/forgotpassword'
+import forgotpassword from './Routes/resetpassword'
 
 app.use('/signup', signup);
 app.use('/login', login);

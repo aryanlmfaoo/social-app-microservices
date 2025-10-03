@@ -26,35 +26,40 @@ router.post('/', async (req, res) => {
 
     const resetPasswordUUID = crypto.randomUUID();
 
-    const result = await prisma.forgotPassword.create({
-        data: {
-            userId: user.id,
-            resetToken: resetPasswordUUID,
-        }
-    });
+    try {
+       await prisma.forgotPassword.create({
+            data: {
+                userId: user.id,
+                resetToken: resetPasswordUUID,
+            }
+        });
 
-    client.setDataResidency('global');
-    const msg = {
-        to: user.email,
-        from: 'aryansharm1223@gmail.com', // company email yk what i mean
-        subject: 'Reset your password',
-        text: 'Hello plain world!',
-        html: `<h1>Reset your password </h1> <a href="https://google.com">${resetPasswordUUID} ${user.id}</a>`, /// TODO change this and fix it
-    };
-    sgMail.setClient(client);
-    sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
-    sgMail
-        .send(msg)
-        .then(() => {
-            console.log('Email sent')
-        })
-        .catch((error) => {
-            console.error(error)
-        })
-    // send email mechanism
+        client.setDataResidency('global');
+        const msg = {
+            to: user.email,
+            from: 'aryansharm1223@gmail.com', // company email yk what i mean
+            subject: 'Reset your password',
+            text: 'Hello plain world!',
+            html: `<h1>Reset your password </h1> <a href="https://google.com">${resetPasswordUUID} ${user.id}</a>`, /// TODO change this and fix it
+        };
+        sgMail.setClient(client);
+        sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
+        sgMail
+            .send(msg)
+            .then(() => {
+                console.log('Email sent')
+            })
+            .catch((error) => {
+                console.error(error)
+            })
+        // send email mechanism
 
+        return res.status(200).json({ success: true });
 
-    return res.status(200).json({ success: true, message: '', data: result });
+    } catch (error) {
+        console.log(error);
+        return res.status(500).json({ success: false, message: "Internal Server Error" });
+    }
 
 })
 

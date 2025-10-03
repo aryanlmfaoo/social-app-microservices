@@ -25,7 +25,7 @@ Authenticates a user and returns a JWT token.
 }
 ```
 
-**Success Response (200):**
+**Success Response (201):**
 ```json
 {
   "success": true,
@@ -33,7 +33,7 @@ Authenticates a user and returns a JWT token.
 }
 ```
 
-**Error Response (200):**
+**Error Response (402 or 404 or 500):**
 ```json
 {
   "success": false,
@@ -59,7 +59,7 @@ Registers a new user and returns a JWT token.
 }
 ```
 
-**Success Response (200):**
+**Success Response (201):**
 ```json
 {
   "success": true,
@@ -67,7 +67,7 @@ Registers a new user and returns a JWT token.
 }
 ```
 
-**Error Response (200):**
+**Error Response (404 or 500):**
 ```json
 {
   "success": false,
@@ -98,7 +98,7 @@ Initiates the password reset process by sending a reset link to the user's email
 ```
 *Note: A password reset link will be sent to the user's registered email address.*
 
-**Error Response (200):**
+**Error Response (401 or 500):**
 ```json
 {
   "success": false,
@@ -123,14 +123,14 @@ Resets the user's password using the token from the reset link.
 }
 ```
 
-**Success Response (200):**
+**Success Response (202):**
 ```json
 {
   "success": true
 }
 ```
 
-**Error Response (200):**
+**Error Response (404 or 500):**
 ```json
 {
   "success": false,

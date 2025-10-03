@@ -17,7 +17,7 @@ router.post('/', async (req, res) => {
 
     // just checking yk
     if (!emailOrUsername || !password) {
-        return res.status(400).json({ success: false, message: 'Invalid input.' });
+        return res.status(404).json({ success: false, message: 'Invalid input.' });
     }
 
     // get data from DB
@@ -31,7 +31,7 @@ router.post('/', async (req, res) => {
 
         // if db doesn't return anything
         if (!dbData) {
-            return res.status(400).json({ success: false, message: 'User not found.' });
+            return res.status(404).json({ success: false, message: 'User not found.' });
         }
 
         // check password
@@ -46,7 +46,7 @@ router.post('/', async (req, res) => {
         }
     } catch (e) {
         console.error(e);
-        return res.status(401).json({ success: false, message: e });
+        return res.status(500).json({ success: false, message: e });
     }
 })
 

@@ -12,12 +12,12 @@ router.post('/', async (req, res) => {
 
     // check data isn't missing
     if (!name || !username || !email || !password) {
-        return res.status(400).json({ success: false, message: 'Invalid email or password' });
+        return res.status(404).json({ success: false, message: 'Invalid email or password' });
     }
 
     // regex check for email
     if (!isEmail(email.toLowerCase())) {
-        return res.status(400).json({ success: false, message: 'Invalid email' });
+        return res.status(404).json({ success: false, message: 'Invalid email' });
     }
 
     // check if email or user already exists
@@ -34,7 +34,7 @@ router.post('/', async (req, res) => {
 
     // if true, return
     if (usernameOrEmailExists > 0) {
-        return res.status(400).json({ success: false, message: 'Username or email already exists. Log in instead.' });
+        return res.status(404).json({ success: false, message: 'Username or email already exists. Log in instead.' });
     }
 
     // hash the password
