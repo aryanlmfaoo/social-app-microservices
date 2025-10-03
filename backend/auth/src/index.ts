@@ -13,11 +13,13 @@ import signup from './Routes/signup'
 import login from './Routes/login'
 import forgotpasswordreq from './Routes/forgotpasswordreq'
 import forgotpassword from './Routes/resetpassword'
+import deleteaccount from './Routes/deleteaccount'
 
 app.use('/signup', signup);
 app.use('/login', login);
 app.use('/forgotpasswordreq', forgotpasswordreq)
 app.use('/forgotpassword', forgotpassword)
+app.use("/deleteaccount", deleteaccount)
 
 // endpoint to test if server is running
 app.get('/test', async (_req, res) => {

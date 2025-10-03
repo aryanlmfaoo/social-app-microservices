@@ -140,6 +140,37 @@ Resets the user's password using the token from the reset link.
 
 ---
 
+### 4. Delete Account
+
+Delete's a user's account.
+
+**Endpoint:** `DELETE /deleteaccount`
+
+**Request Body:**
+```json
+{
+  "id": "string",
+  "password": "string"
+}
+```
+
+**Success Response (200):**
+```json
+{
+  "success": true
+}
+```
+
+**Error Response (404 or 500):**
+```json
+{
+  "success": false,
+  "message": "Error message describing what went wrong"
+}
+```
+
+---
+
 ## Authentication
 
 After successful login or signup, use the returned JWT token in subsequent requests:
