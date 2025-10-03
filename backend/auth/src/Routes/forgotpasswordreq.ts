@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
         from: 'aryansharm1223@gmail.com', // company email yk what i mean
         subject: 'Reset your password',
         text: 'Hello plain world!',
-        html: `<h1>Reset your password </h1> <a href="https://google.com">${resetPasswordUUID} ${user.id}</a>`, /// TODO change this and fix it 
+        html: `<h1>Reset your password </h1> <a href="https://google.com">${resetPasswordUUID} ${user.id}</a>`, /// TODO change this and fix it
     };
     sgMail.setClient(client);
     sgMail.setApiKey(process.env.SENDGRID_API_KEY || "");
