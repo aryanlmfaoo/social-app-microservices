@@ -37,7 +37,7 @@ router.post("/", async (req, res) => {
             `in ${summary.resultAvailableAfter} ms.`
         )
 
-        return res.status(201).json({ success: true, data: { records, summary } });
+        return res.status(201).json({ success: true });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ success: false, message: "Internal Server Error." })

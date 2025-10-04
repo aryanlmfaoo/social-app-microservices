@@ -140,9 +140,9 @@ Resets the user's password using the token from the reset link.
 
 ---
 
-### 4. Delete Account
+### 5. Delete Account
 
-Delete's a user's account.
+Deletes a user's account.
 
 **Endpoint:** `DELETE /deleteaccount`
 
