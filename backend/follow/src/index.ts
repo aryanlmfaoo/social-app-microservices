@@ -12,6 +12,7 @@ import removeuser from './Routes/removeuser';
 import follow from './Routes/follow';
 import unfollow from './Routes/unfollow';
 import getfollowers from './Routes/getfollowers'
+import getsuggestedaccounts from './Routes/getsuggestedaccounts'
 
 connectToNeo() // connecting to db
 
@@ -23,6 +24,7 @@ app.use("/removeuser", removeuser);
 app.use("/follow", follow);
 app.use("/unfollow", unfollow);
 app.use("/getfollowers", getfollowers)
+app.use("/getsuggestedaccounts", getsuggestedaccounts);
 
 app.listen(5001, () => {
     console.log("Listening on port 5001");

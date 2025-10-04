@@ -165,6 +165,40 @@ Retrieves all followers of a specified user.
   "message": "Error message describing what went wrong"
 }
 ```
+---
+
+### 6. Get Suggested Followers
+
+Retrieves a list of suggested accounts for a specified user to follow.
+
+**Endpoint:** `GET /getsuggestedaccounts?id=${userid}&page=${suggestionPage}&limit=${}`
+
+**Query Parameters:**
+- `id`: The ID of the user for whom suggested accounts are being retrieved.
+- `page`: The pagination page number for retrieving results.
+- `limit`: The number of suggested accounts to return per page.
+
+**Success Response (200):**
+```json
+{
+  "success": true,
+  "data": [
+    {
+      "id": "string",
+      "username": "string",
+      "email": "string"
+    }
+  ]
+}
+```
+
+**Error Response (404 or 500):**
+```json
+{
+  "success": false,
+  "message": "Error message describing what went wrong"
+}
+```
 
 ## Error Handling
 
